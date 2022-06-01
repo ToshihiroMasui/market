@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <div class="profile">
+        
+      <div class="image">
+          <%= image_tag image_url(@user), size: '200x200' %>
+      </div>
+       
+            
+            <div class="name">
+              <h1><%= @user.name %></h1>
+            </div>
+          
+            <div class="comment">
+              <p><%= @user.profile %></p>
+            </div>
+            
+            <div class="">
+              <p><%= @product.count %>個</p>
+            </div>
+      </div>
+    </div>
+      <div class="col-3">
+        <ul class="bg-white">
+          <li class="m-3">
+            <%= link_to '出品する', new_product_path, class: 'text-dark' %>
+          </li>
+          
+          <li class="m-3">
+            <%= link_to '出品中の商品', user_path(@user), class: 'text-dark' %>
+          </li>
+          
+          <li class="m-3">
+            <%= link_to 'お気に入りの商品', likes_user_path(@user), class: 'text-dark' %>
+          </li>
+          
+          <li class="m-3">
+            <%= link_to 'プロフィール更新', edit_user_path(@user), class: 'text-dark' %>
+          </li>
+          
+          <li class="m-3">
+            <%= link_to 'ログアウト', destroy_user_session_path, class: 'text-dark', method: :delete%>
+          </li>
+        </ul>
+        
+    </div>
+  </div>
+</div>
+  

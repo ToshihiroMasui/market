@@ -1,0 +1,18 @@
+<div class="container">
+    <div class = "item">
+        <h3><%= @product.name %></h3>
+            <%= image_tag @product.image1 %>
+        <h3>¥<%= @product.price %></h3>
+        
+    </div>
+    
+    <% if @product.status <= 0 %>
+        <div class="bg-secondary"><p>売り切れ</p></div>
+            <% else %>
+                <%= link_to pay_product_path(@product),method: :post do %>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-primary" type="button">購入を確定する</button>
+                    </div>
+            <% end %>
+    <% end %>
+</div>

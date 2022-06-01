@@ -1,0 +1,34 @@
+<div class="container">
+    
+        <%= image_tag image_url(@user), size: '200x200' %>
+    
+        <%= form_with model: @user, local: true do |f| %>
+    
+    <div>
+        <label for="image">画像</label>
+        <%= f.file_field :image , class: "mb-5", id:"image"%>
+    </div>
+    
+    <div class="form-group">
+        <label for="profile_name">名前</label>
+            <%= f.text_field :name, class: "form-control", id:"profile_name", placeholder:"" %>
+    </div>
+  
+    <div class="form-group">
+        <label for="profile_text">プロフィール</label>
+        <%= f.text_area :profile, class: "form-control", id:"profile_text", placeholder:"" %>
+    </div>
+    <div class="form-group">
+        <label for="password">パスワード</label>
+        <%= f.password_field :password, class: 'form-control' , id:"password"%>
+    </div>
+    <div class="form-group">
+        <label for="password_check">パスワード（確認用）</label>
+        <%= f.password_field :password_confirmation, class: 'form-control', id:"password_check" %>
+    </div>
+        <button type="submit" class="btn btn-primary mt-1">更新する</button>
+        <% end %>
+</div>
+
+
+

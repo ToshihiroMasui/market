@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="row">
+    <div class="column col-lg-9">
+
+      <div class="row">
+        
+          <% if @product.present? %>
+            <% @product.each do |product| %>
+              <%= link_to product_path(product.id) do %>
+                
+
+              <div class="col-lg-4">
+                  <div class="card-deck">
+                    <div class="card" style="width: 18rem">
+                      <% if product.image1.present? %>
+                        <%= image_tag product.image1, class: "card-img-top" %>
+                      <% else %>
+                        <%= image_tag "https://dummyimage.com/200x200/000/fff", class: "card-img-top" %>
+                      <% end %>
+
+                          <div class="card-body">
+                            <h5 class="card-title"><%= product.name %></h5>
+                              <p class="card-text">￥<%= product.price %></p>
+                                <% if product.status <= 0 %>
+                                  <p>売り切れ</p>
+                                <% else %>
+                                  <p class="card-text">￥<%= product.status %>個</p>
+                                <% end %>
+                                  <%= link_to like_product_path(product.id), method: :post do %>
+                                    <i class="fa <%= product.like_from?(current_user)? "fa-heart active" : "fa-heart-o" %>"></i>
+                        <% end %>
+                          </div>
+                    </div>
+                  </div>
+              </div>
+
+
+                
+              <% end %>
+            <% end %>
+          <% else %>
+            <!--検索がヒットしなかった場合-->
+            <p>対象の商品は見つかりませんでした。</p>
+          <% end %>
+        
+      </div>
+
+    </div>
+  
+      
+    
+
+    
+      
+    <div class="side col-lg-3">
+        <%= search_form_for @q do |f| %>
+            <div class="form-group">
+              <%= f.label :name_cont, '商品名' %>
+              <%= f.search_field :name_cont, class: "form-control" %>
+            </div>
+                    
+            <div class="form-group">
+              <%= f.label :price_gteq, "価格" %>
+              <%= f.number_field :price_gteq, placeholder:"0" , class: "form-control"%>
+              <%= f.label :price_lteq, " ~ " %>
+              <%= f.number_field :price_lteq, placeholder:"0", class: "form-control"%>
+            </div>
+                    
+            <div class="form-group">
+              <label for="category">カテゴリ</label>
+              <%= f.collection_select :category_id_eq, @categories, :id, :name %>
+            </div>
+                    
+            <div class="form-group">
+              <label for="change">並び替え</label>
+              <%= f.select( :sorts, { '価格の安い順': 'price asc', '価格の高い順': 'price desc', '出品の古い順': 'updated_at asc', '出品の新しい順': 'updated_at desc' } , 
+              { selected: params[:q][:sorts] }, { onchange: 'this.form.submit()'},) %>
+            </div>
+                      
+            <%= f.submit "検索" %>
+        <% end %>
+    </div>
+
+  </div>
+</div>
+  
+

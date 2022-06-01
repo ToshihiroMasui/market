@@ -1,0 +1,36 @@
+<div class="container">
+  <%= form_with model: @product, local: true do |f| %>
+  <% if @product.image1.present? %>
+            <%= image_tag @product.image1, :size => '300x300'%>
+        <% else %>
+            <%= image_tag "https://dummyimage.com/200x200/000/fff" %>
+        <% end %>
+    <div class="form-group">
+      <label for="product_name">商品名</label>
+        <%= f.text_field :name, class: "form-control", id:"product_name", placeholder:"コードキャンプのTシャツです"%>
+    </div>
+  
+    <div class="form-group">
+      <label for="explanatory_text">説明文</label>
+        <%= f.text_area :description, class: "form-control", id:"explanatory_text", placeholder:"コードキャップで作成したTシャツです", rows:"1"%>
+    </div>
+    
+    <div id="category" >
+      <label for="category">カテゴリ</label>
+        <%= f.select :category_id, options_from_collection_for_select(@category, :id, :name), {class:"form-control"} %>
+    </div>
+    
+    <div class="form-group">
+      <label for="price">価格</label>
+        <%= f.number_field :price, class:"form-control", placeholder:"0" %>
+    </div>
+    
+    <div>
+      <%= f.label :画像 %>
+      <%= f.file_field :image1 %>
+    </div>
+    
+    <button type="submit" class="btn btn-primary mt-5">更新する</button>
+ 
+  <% end %>
+</div>

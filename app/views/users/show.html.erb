@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="card-deck">
+      <% if @product.present? %>
+        <% @product.each do |product| %>
+          <%= link_to product_path(product.id) do %>
+            <div class="card" style="width: 18rem;">
+                  <% if product.image1.present? %>
+                    <%= image_tag product.image1, class: "card-img-top" %>
+                  <% else %>
+                    <%= image_tag "https://dummyimage.com/200x200/000/fff", class: "card-img-top" %>
+                  <% end %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= product.name %></h5>
+                  <p class="card-text">￥<%= product.price %></p>
+                </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>  
+        <p>出品中の商品はありません。</p>
+      <% end %>
+    </div>
+</div>
